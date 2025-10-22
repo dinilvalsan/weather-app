@@ -1,0 +1,35 @@
+# This file configures the build and deployment settings for Netlify
+
+# 1. Build Settings
+[build]
+  # The 'base' directory tells Netlify to run the build command
+  # from within the 'frontend' folder.
+  base = "frontend"
+  
+  # This command tells Netlify how to build your Angular app.
+  command = "ng build --configuration=production"
+  
+  # This is the directory (relative to the base) that
+  # contains the built static site.
+  publish = "dist/frontend"
+  
+  # This is the directory (relative to the root) where
+  # Netlify will find your serverless functions.
+  functions = "netlify/functions"
+
+# 2. Proxy/Rewrite Rule
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# 3. Local Development Settings (for `netlify dev`)
+[dev]
+  # This tells `netlify dev` to run the Angular dev server
+  command = "ng serve"
+  
+  # The port that the Angular dev server runs on
+  port = 4200
+  
+  # The folder to serve static files from (not always needed for Angular)
+  publish = "frontend/dist/frontend"

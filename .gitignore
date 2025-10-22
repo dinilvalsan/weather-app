@@ -1,0 +1,15 @@
+# Local environment variables
+.env
+
+# Node modules
+/node_modules
+/frontend/node_modules
+/netlify/functions/node_modules
+
+# Angular build cache
+/frontend/.angular
+
+# Dist folder
+/frontend/dist
+# Local Netlify folder
+.netlify

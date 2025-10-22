@@ -1,0 +1,37 @@
+<div class="container">
+  <h1>Weather App</h1>
+  <p>Powered by Angular, Node.js, and Netlify Functions</p>
+
+  <div class="form-group">
+    <input
+      type="text"
+      placeholder="Enter city name"
+      [(ngModel)]="city"
+      (keyup.enter)="getWeather()"
+    />
+    <button (click)="getWeather()" [disabled]="loading">
+      {{ loading ? 'Loading...' : 'Get Weather' }}
+    </button>
+  </div>
+
+  <div *ngIf="error" class="error-box">
+    {{ error }}
+  </div>
+
+  <div *ngIf="weatherData" class="weather-card">
+    <h2>{{ weatherData.name }}, {{ weatherData.sys.country }}</h2>
+    <div class="main-info">
+      <img
+        [src]="'[https://openweathermap.org/img/wn/](https://openweathermap.org/img/wn/)' + weatherData.weather[0].icon + '@2x.png'"
+        [alt]="weatherData.weather[0].description"
+      />
+      <span class="temp">{{ weatherData.main.temp | number:'1.0-0' }}°C</span>
+    </div>
+    <p class="description">{{ weatherData.weather[0].description | titlecase }}</p>
+    <div class="details">
+      <p><strong>Feels like:</strong> {{ weatherData.main.feels_like | number:'1.0-0' }}°C</p>
+      <p><strong>Humidity:</strong> {{ weatherData.main.humidity }}%</p>
+      <p><strong>Wind:</strong> {{ weatherData.wind.speed }} m/s</p>
+    </div>
+  </div>
+</div>
